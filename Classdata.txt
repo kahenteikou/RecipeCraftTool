@@ -1,0 +1,5 @@
+{
+LWJGL
+Minecraft
+GLFW30
+}
