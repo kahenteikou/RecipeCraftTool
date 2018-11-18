@@ -1,14 +1,15 @@
-�N���t�g�c�[��
+クラフトツール
 
-�E�g�����͓�������Q�Ƃ�������
-�E���̃c�[����p���Ĕ������������Ȃ�g���u���A�s���v�ȓ_��fumitoramann�͐ӔC�𕉂��܂���B
-�E���̃c�[����windows�̂ݓ�����m�F���Ă��܂��B
+・使い方は動画をご参照ください
+・このツールを用いて発生したいかなるトラブル、不利益な点もfumitoramannは責任を負いません。
+・このツールはwindowsのみ動作を確認しています。
 
-�����:fumitoramann
-�ǋL
-ClassData.txt�ɂ���
-{}�ň͂�ł钆�ɁA���s����Ń}�C�N����WIndowCLass�����Ă��������B
-�o�[�W�������ς��ƕς��\��������܂�(Fumi�����LWJGL�����Ă��܂�����1.13����?GLFW30�ɂȂ����悤�ł��B)
-Spy++�Ŏ擾���ăt�@�C���ɒǋL����Ɨǂ��ł��傤�B
-���C�Z���X: GPL
-�ǋL�A����:kokkiemouse
+制作者:fumitoramann
+追記
+ClassData.txtについて
+{}で囲んでる中に、改行入りでマイクラのWIndowCLassを入れてください。
+バージョンが変わると変わる可能性があります(FumiさんはLWJGLを入れていましたが1.13から?GLFW30になったようです。)
+Spy++で取得してファイルに追記すると良いでしょう。
+最期に、僕はただ改造しただけです。原作者のfumiさんに敬意を払って使いましょう!
+ライセンス: GPL
+追記、改造:kokkiemouse
