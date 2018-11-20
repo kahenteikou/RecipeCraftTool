@@ -1,55 +1,60 @@
-#include "llmod3.hsp"
+//ライブラリのインクルード
+#include "llmod3.hsp"  
 #include "input.hsp"
 #uselib "user32.dll"
 #func MessageBox "MessageBoxA" int, sptr, sptr, int
 #cfunc FindWindow "FindWindowA" str, int
 #func GetWindowRect "GetWindowRect" int,int
-screen 0,200,200
+//ここまで
+screen 0,200,200//ウィンドウサイズの設定
 
-z=100
-dim aaa,4
-exist "Classdata.txt"
-if strsize=-1:dialog("�t�@�C��������܂���!\rClassdata.txt���쐬���Ă�������!"):end
-notesel buf
-noteload "Classdata.txt"
-repeat -1,0
-sdim data, 256
-sdim kugiri, 256
-noteget data, cnt
-if cnt=0 : kugiri=data : goto *loopending
-hndle=FindWindow(data,)
-if hndle=0{
-	//if	str_comp("EOF",data) : dialog("Minecraft���N������Ă��܂���B"):end
-	if data=kugiri : dialog("Minecraft���N������Ă��܂���B"):end
-	/*dialog("Minecraft���N������Ă��܂���B"):end*/
-}else{
-	break;
+z=100//初期のwait値
+dim aaa,4//変数の初期化
+exist "Classdata.txt"//ファイルがあるか念のため確認
+if strsize=-1:dialog("ファイルがありません!\rClassdata.txtを作成してください!"):end//ない場合は強制終了
+notesel buf//バッファ確保
+noteload "Classdata.txt"//読み込み
+//ここから
+repeat -1,0//無限ループ(breakで抜け出す)
+sdim data, 256//変数確保
+sdim kugiri, 256//上に同じ
+noteget data, cnt//cnt行のデータを取得してdataに代入(cntはループ回数)
+if cnt=0 : kugiri=data : goto *loopending//最初の行は区切り文字として利用して、次のループに移る
+hndle=FindWindow(data,)//dataのclass名を持つwindowを検索
+if hndle=0{//存在しないなら
+	//if	str_comp("EOF",data) : dialog("Minecraftが起動されていません。"):end
+	if data=kugiri : dialog("Minecraftが起動されていません。"):end//その行が最後(区切り文字)だったらメッセージを出して強制終了
+	/*dialog("Minecraftが起動されていません。"):end*/
+}else{//違うなら(存在したら)
+	break;//ループから抜け出す
 }
-*loopending
+*loopending//ただのラベル
 loop
+//ここまでループ
 
-x=1:y=1
+x=1:y=1//初期座標を指定
+//ここから
+mes "レシピブックの横"
+mes "レシピブックの縦"
+mes "実行速度(wait値)"
+//ここまで表示する文字の指定
 
-mes "���V�s�u�b�N�̉�"
-mes "���V�s�u�b�N�̏c"
-mes "���s���x(wait�l)"
+pos 130,0//場所を決める
+input x//入力として初期化
+input y//上に同じ
+input z//上に同じ
 
-pos 130,0
-input x
-input y
-input z
+pos 0,150//位置を決める
+mes "制作：fumitoramann"//テキスト表示
 
-pos 0,150
-mes "����Ffumitoramann"
-
-*lll
-stick a,32,0
-if a&32:gosub *jikkou
-await 10
-goto *lll
+*lll//ラベル
+stick a,32,0//aにキーの情報を代入
+if a&32:gosub *jikkou//押されてたら(Enter)*jikkouにワープ(gosubなのでサブルーチン)
+await 10//松
+goto *lll//ムゲンループ
 
 *jikkou
-GetWindowRect hndle,varptr(aaa)
+GetWindowRect hndle,varptr(aaa)//ウィンドウの座標を取得
 
 /*
 cls:i=0
@@ -61,19 +66,19 @@ mes ""+(aaa(0)+aaa(2))/2+","+(aaa(1)+aaa(3))/2+""
 */
 	
 
-mx=(aaa(0)+aaa(2))/2-270+50*(x-1)
-my=(aaa(1)+aaa(3))/2-80+50*(y-1)
+mx=(aaa(0)+aaa(2))/2-270+50*(x-1)//座標を取得
+my=(aaa(1)+aaa(3))/2-80+50*(y-1)//上に同じ
 
-mouse mx,my
-await z
-mouse_event $2:await 1:mouse_event $4
+mouse mx,my//マウス移動
+await z//wait値だけ待つ
+mouse_event $2:await 1:mouse_event $4//クリックして離す
 
 
 
-mx=(aaa(0)+aaa(2))/2+240
-my=(aaa(1)+aaa(3))/2-80
+mx=(aaa(0)+aaa(2))/2+240//座標取得
+my=(aaa(1)+aaa(3))/2-80//上に同じ
 
-mouse mx,my
-await z
-mouse_event $2:await 1:mouse_event $4
-return
+mouse mx,my//マウス移動
+await z//wait値だけ待つ
+mouse_event $2:await 1:mouse_event $4//クリックして離す
+return//gosubなのでリターン(gosubの次の行にjump)
